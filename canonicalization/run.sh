@@ -1,0 +1,1 @@
+g++ -g -std=c++11 isa.h enum.h enum.cpp brute_force.cpp
