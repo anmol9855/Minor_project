@@ -45,7 +45,7 @@ int main(){
 
 	vector<inst> code;
 	best_result b;
-	test_seq T(&input,&output,error_bound,code,0);
+	test_seq T(&input,&output,error_bound,code,1);
 
 	start = clock();
 	

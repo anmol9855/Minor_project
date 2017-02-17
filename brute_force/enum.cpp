@@ -78,8 +78,6 @@ vector<inst> inst_generator(){
 	{
 		for (int j = 0; j < REG_COUNT; ++j)
 		{
-			if(i==j)
-				continue;
 			for (int k = 0; k < INST_COUNT; ++k)
 			{
 				inst I(k,2,i,j,-1);
@@ -105,13 +103,13 @@ vector<inst> inst_generator(){
 
 int check_all_inst_seq(test_seq T,int len,best_result* b){
 	if(len == 0){
-		if(b->nsat == T.input->size())
-			return 1;
-		int a = satisfiability(T);
-		if(b->nsat<a){
-			b->code = T.code;
-			b->nsat = a;
-		}
+		// if(b->nsat == T.input->size())
+		// 	return 1;
+		// int a = satisfiability(T);
+		// if(b->nsat<a){
+		// 	b->code = T.code;
+		// 	b->nsat = a;
+		// }
 		return 1;	
 	}
 	else{
@@ -119,13 +117,13 @@ int check_all_inst_seq(test_seq T,int len,best_result* b){
 		vector<inst> a = inst_generator();
 		for(int i = 0; i < a.size(); ++i)
 		{
-			if(b->nsat == T.input->size())
-				break;
+			// if(b->nsat == T.input->size())
+			// 	break;
 			vector<inst> tmp = T.code;
 			tmp.push_back(a[i]);
 			test_seq T1(T.input,T.output,T.error_bound,tmp);
-			if(len == 3)
-				cout<<"update"<<endl;
+			// if(len == 3)
+			// 	cout<<"update"<<endl;
 			count += check_all_inst_seq(T1,len-1,b);
 		}
 		return count;

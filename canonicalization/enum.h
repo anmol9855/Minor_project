@@ -30,7 +30,7 @@ struct best_result{
 //returns state of a system given a vector of inst
 state exec_inst_seq(state s,vector<inst>* code);
 state exec_inst(state S,inst I);
-vector<inst> inst_generator(int active_regs);
+vector<inst> inst_generator(int active_regs,int len);
 int check_all_inst_seq(test_seq T,int len,best_result* b);
 void print_instruction(inst I);
 void print_instruction_seq(vector<inst> code);

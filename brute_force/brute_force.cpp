@@ -27,8 +27,8 @@ int main(){
 	double error_bound;
 	cout<<"Enter error bound"<<endl;
 	cin >> error_bound;
-	input.resize(10001);
-	output.resize(10001);
+	input.resize(1001);
+	output.resize(1001);
 	ifstream myfile ("../functions/poly1.txt");
 	int index = 0;
 	if (myfile.is_open())
@@ -49,7 +49,7 @@ int main(){
 
 	start = clock();
 	
-	int res = check_all_inst_seq(T,3,&b);
+	int res = check_all_inst_seq(T,2,&b);
 	
 	end = clock();
 	double totalTime = (double)(end-start)/CLOCKS_PER_SEC;

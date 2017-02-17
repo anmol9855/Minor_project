@@ -69,29 +69,30 @@ state exec_inst(state S,inst I){
 }
 
 //TODO- allow for symbolic constants
-vector<inst> inst_generator(int active_regs){
+vector<inst> inst_generator(int active_regs,int len){
 	vector<inst> Iset;
 	int index1 = min(active_regs,REG_COUNT-1);
 	int index2 = min(index1+1,REG_COUNT-1);
 	//generate all instructions with both operands as registers
-	for(int i = 0; i <= index1; ++i)
+	for(int i = 0; i < index1; ++i)
 	{
-		for (int j = 0; j <= index2 ; ++j)
+		for (int j = 0; j < index2 ; ++j)
 		{
-			if(i==j)
-				continue;
 			for (int k = 0; k < INST_COUNT; ++k)
 			{
 				//case of mov instruction (eg. mov r0 r0)
+				if(k==0 && i==j)
+					continue;
+				if(len == 1 && j!=OUTPUT_INDEX)
+					continue;
 				inst I(k,2,i,j,-1);
 				Iset.push_back(I);				
 			}
-		
 		}
 	}
 
 	//generate all instructions involving an immediate
-	for(int i = 0; i <= index1; ++i)
+	for(int i = 0; i < index1; ++i)
 	{
 		for (int k = 0; k < INST_COUNT; ++k)
 		{
@@ -106,23 +107,23 @@ vector<inst> inst_generator(int active_regs){
 
 int check_all_inst_seq(test_seq T,int len,best_result* b){
 	if(len == 0){
-		if(b->nsat == T.input->size())
-			return 1;
-		int a = satisfiability(T);
-		if(b->nsat<a){
-			b->code = T.code;
-			b->nsat = a;
-		}
+		// if(b->nsat == T.input->size())
+		// 	return 1;
+		// int a = satisfiability(T);
+		// if(b->nsat<a){
+		// 	b->code = T.code;
+		// 	b->nsat = a;
+		// }
 		return 1;	
 	}
 
 	else{
 		int count = 0;
-		vector<inst> a = inst_generator(T.active_regs);
+		vector<inst> a = inst_generator(T.active_regs,len);
 		for(int i = 0; i < a.size(); ++i)
 		{
-			if(b->nsat == T.input->size())
-				break;
+			// if(b->nsat == T.input->size())
+			// 	break;
 			vector<inst> tmp = T.code;
 			tmp.push_back(a[i]);
 			int max_index = max(a[i].regIndex1,a[i].regIndex2);
