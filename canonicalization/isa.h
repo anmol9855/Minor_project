@@ -9,7 +9,7 @@
 #define REG_COUNT 4
 #define INPUT_INDEX 0
 #define OUTPUT_INDEX 1
-#define INST_COUNT 5
+#define INST_COUNT 7
 
 using namespace std;
 

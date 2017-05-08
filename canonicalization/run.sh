@@ -1,1 +1,1 @@
-g++ -g -std=c++11 isa.h enum.h enum.cpp brute_force.cpp
+g++ -g -std=c++11 -fopenmp -o main isa.h exec.h exec.cpp main.cpp
